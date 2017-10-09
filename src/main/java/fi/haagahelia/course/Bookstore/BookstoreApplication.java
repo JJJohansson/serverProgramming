@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import fi.haagahelia.course.Bookstore.domain.Book;
 import fi.haagahelia.course.Bookstore.domain.BookRepository;
+import fi.haagahelia.course.Bookstore.domain.Category;
+import fi.haagahelia.course.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -21,19 +23,32 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 	
-	/**
-	 * @param repository
-	 * @return
-	 */
 	@Bean
-	public CommandLineRunner demo(BookRepository repository) {
+	public CommandLineRunner demo(CategoryRepository crepository, BookRepository brepository) {
 		return (args) -> {
-			log.info("save a couple of books");
-			repository.save(new Book("Stories from Ass", "Ass Ketchum", 1991, "000001", 99.99));
-			repository.save(new Book("Lord of the Ring", "J. R. R. Tolkien", 1954, "000002", 39.95));
+			log.info("-- SAVING CATEGORIES --");
+			crepository.save(new Category("Horror"));
+			crepository.save(new Category("Educational"));
+			crepository.save(new Category("Romance"));
+			crepository.save(new Category("Fantasy"));
+			crepository.save(new Category("Science fiction"));
+			crepository.save(new Category("Diary"));
+			crepository.save(new Category("Poetry"));
+			crepository.save(new Category("Drama"));
 			
-			log.info("fetch all the books");
-			for (Book book : repository.findAll()) {
+			
+			log.info("-- SAVING BOOKS --");
+			brepository.save(new Book("Stories from Ass", "Ass Ketchum", 1991, "000001", 99.99, crepository.findByName("Diary").get(0)));
+			brepository.save(new Book("Lord of the Rings", "J. R. R. Tolkien", 1954, "000002", 39.95, crepository.findByName("Fantasy").get(0)));
+			brepository.save(new Book("Space Junkies", "Author X", 2147, "000002", 49.95, crepository.findByName("Science fiction").get(0)));
+			
+			log.info("--- FETCHING CATEGORIES ---");
+			for (Category category : crepository.findAll()) {
+				log.info(category.toString());
+			}
+			
+			log.info("--- FETCHING BOOKS ---");
+			for (Book book : brepository.findAll()) {
 				log.info(book.toString());
 			}
 		};
