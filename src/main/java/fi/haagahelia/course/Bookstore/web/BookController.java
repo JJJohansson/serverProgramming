@@ -47,6 +47,7 @@ public class BookController {
     	return brepository.findOne(bookId);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/add")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
