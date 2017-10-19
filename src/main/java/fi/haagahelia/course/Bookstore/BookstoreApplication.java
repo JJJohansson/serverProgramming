@@ -48,7 +48,7 @@ public class BookstoreApplication {
 			brepository.save(new Book("Stories from Ass", "Ass Ketchum", 1991, "000001", 99.99, crepository.findByName("Diary").get(0)));
 			brepository.save(new Book("Lord of the Rings", "J. R. R. Tolkien", 1954, "000002", 39.95, crepository.findByName("Fantasy").get(0)));
 			brepository.save(new Book("Space Junkies", "Author X", 2147, "000003", 49.95, crepository.findByName("Science fiction").get(0)));
-			// brepository.s
+			brepository.save(new Book("The Book", "An Author", 1946, "000004", 19.95, crepository.findByName("Poetry").get(0)));
 			
 			log.info("--- FETCHING CATEGORIES ---");
 			for (Category category : crepository.findAll()) {

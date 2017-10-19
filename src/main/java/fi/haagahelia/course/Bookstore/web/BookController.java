@@ -36,12 +36,14 @@ public class BookController {
     }
     
     // REST
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/books", method = RequestMethod.GET)
     @ResponseBody public List<Book> bookListRest() {
     	return (List<Book>) brepository.findAll();
     }
     
     // REST
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/book/{id}", method = RequestMethod.GET)
     public @ResponseBody Book findBookRest(@PathVariable("id") Long bookId) {
     	return brepository.findOne(bookId);

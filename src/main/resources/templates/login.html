@@ -7,19 +7,19 @@
    		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
     </head>
     <body>
-        <div class="col md-4">
+        <div class="col sm-12">
 	        <form th:action="@{/login}" method="post">
        			<div th:if="${param.error}">
-          			<p> Invalid user name or password. </p>
+          			<p class="text-info"> Invalid user name or password. </p>
       			</div>
 		        <div th:if="${param.logout}">
 		           <p> You have been logged out. </p>
 		        </div>
 	            <div><label> User Name : <input type="text" name="username" class="form-control"/> </label></div>
 	            <div><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
-	            <p>
-	            	<div><input type="submit" value="Sign In" class="btn btn-primary"/></div>
-	            </p>
+	            <div>
+	            	<p><input type="submit" value="Sign In" class="btn btn-primary"/></p>
+	            </div>
 	            <p>
 	            	<a th:href="@{/signup}" class="btn btn-success">Sign-up</a>
 	            </p>

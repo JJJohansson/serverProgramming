@@ -25,7 +25,10 @@
 		    <th>Year</th>
 		    <th>ISBN</th>
 		    <th>Price</th>
-		    <th sec:authorize="hasRole('ADMIN')"> </th>
+		    <th>Category</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
 		</tr>  
     	<tr th:each = "book : ${books}">
     		<td th:text="${book.id}"></td>
@@ -34,11 +37,13 @@
     		<td th:text="${book.year}"></td>
     		<td th:text="${book.isbn}"></td>
     		<td th:text="${book.price}"></td>
-    		<td th:text="${book.category.name}"></td>
-		    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>  
- 			<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+    		<td th:text="${book.category.name}"></td>  
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-success">Edit</a></td>
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/book/{id}(id=${book.id})}" class="btn btn-info">REST</a></td>
+		    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
     	</tr>
      </table>
-	 <a class="btn btn-success" href="/add">Add Book</a>
+	 <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/add">Add Book</a>
+	 <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-info" href="/api/books">REST</a>
 </body>
 </html>
