@@ -26,7 +26,7 @@ public class BookRepositoryTest {
 			List<Book> books = brepository.findByTitle("The Book");
 			
 			assertThat(books).hasSize(1);
-			assertThat(books.get(0).getTitle()).isEqualTo("A Book"); // "Should be "The Book" but instead is "A Book". The test will notify the developer of this :) IT'S ALL ACCORDING TO THE PLAN! I SWEAR!
+			assertThat(books.get(0).getTitle()).isEqualTo("A Book"); // "Should be "The Book" but is instead "A Book". The test will notify the developer of this :) IN THIS CASE THIS IS MEANT TO HAPPEN! I SWEAR!
 			
 		}
 		
